@@ -137,12 +137,12 @@ Create a `.env` file in the root directory:
 ```env
 # Server
 NODE_ENV=development
-PORT=3000
+PORT=3100
 
 # Database
 DB_HOST=localhost
 DB_PORT=3306
-DB_NAME=app_db
+DB_NAME=gestionpro
 DB_USER=root
 DB_PASSWORD=your_password
 
@@ -169,7 +169,7 @@ npm start
 ## 📚 API Documentation
 
 ### Base URL
-`http://localhost:3000/api`
+`http://localhost:3100/api`
 
 ### Health Check
 - `GET /` - API status
@@ -201,7 +201,7 @@ The API uses JWT with access and refresh tokens:
 
 #### Register User
 ```bash
-curl -X POST http://localhost:3000/api/auth/register \
+curl -X POST http://localhost:3100/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -212,23 +212,23 @@ curl -X POST http://localhost:3000/api/auth/register \
 
 #### Login
 ```bash
-curl -X POST http://localhost:3000/api/auth/login \
+curl -X POST http://localhost:3100/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "john@example.com",
+    "user": "john@example.com",
     "password": "password123"
   }'
 ```
 
 #### Access Protected Route
 ```bash
-curl -X GET http://localhost:3000/api/auth/profile \
+curl -X GET http://localhost:3100/api/auth/profile \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 #### Refresh Token
 ```bash
-curl -X POST http://localhost:3000/api/auth/refresh \
+curl -X POST http://localhost:3100/api/auth/refresh \
   -H "Content-Type: application/json" \
   -d '{
     "refreshToken": "YOUR_REFRESH_TOKEN"
@@ -274,18 +274,39 @@ curl -X POST http://localhost:3000/api/auth/refresh \
 
 ## 🧪 Testing
 
-The project is structured to be easily testable. Consider adding:
+The project includes a complete testing setup with Jest:
 
 ```bash
-npm install --save-dev jest @types/jest ts-jest supertest @types/supertest
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
 ```
+
+### Test Structure
+- `tests/` - Test files directory
+- `tests/setup.ts` - Test configuration
+- `tests/auth.test.ts` - Authentication tests
+- Jest configured with TypeScript support
+- Coverage reporting enabled
 
 ## 📝 Scripts
 
 - `npm run dev` - Start development server with hot reload
 - `npm run build` - Compile TypeScript to JavaScript
 - `npm start` - Start production server
-- `npm test` - Run tests (when configured)
+- `npm test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage
+- `npm run docker:build` - Build Docker image
+- `npm run docker:run` - Run Docker container
+- `npm run docker:dev` - Start full stack with Docker Compose
+- `npm run docker:logs` - View Docker logs
+- `npm run docker:down` - Stop Docker services
 
 ## 📄 License
 
@@ -312,10 +333,12 @@ cp .env.example .env  # Edita con tus credenciales
 npm install
 ```
 
-## �� Future Enhancements
+## 🔮 Future Enhancements
 
-- Role-based access control (RBAC)
-- Rate limiting
-- API documentation
-- Unit and integration tests
-- Docker containerization
+- Rate limiting with express-rate-limit
+- API documentation with Swagger/OpenAPI
+- Performance monitoring and logging
+- File upload handling
+- Email notifications
+- Redis caching layer
+- API versioning
