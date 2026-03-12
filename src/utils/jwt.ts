@@ -1,27 +1,29 @@
-import jwt, { SignOptions } from 'jsonwebtoken';
-import { JwtPayload } from '../types/auth';
+import jwt from 'jsonwebtoken';
+
+export interface JwtPayload {
+  userId: string | number;
+  user: string;
+  type: 'access' | 'refresh';
+}
 
 export class JwtService {
-  private static readonly ACCESS_TOKEN_SECRET =
-    process.env.JWT_ACCESS_SECRET || 'access-secret';
-  private static readonly REFRESH_TOKEN_SECRET =
+  static ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_SECRET || 'access-secret';
+  static REFRESH_TOKEN_SECRET =
     process.env.JWT_REFRESH_SECRET || 'refresh-secret';
-  private static readonly ACCESS_TOKEN_EXPIRES_IN =
-    process.env.JWT_ACCESS_EXPIRES_IN || '15m';
-  private static readonly REFRESH_TOKEN_EXPIRES_IN =
-    process.env.JWT_REFRESH_EXPIRES_IN || '7d';
+  static ACCESS_TOKEN_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN || '15m';
+  static REFRESH_TOKEN_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
 
   static generateAccessToken(payload: Omit<JwtPayload, 'type'>): string {
     return jwt.sign({ ...payload, type: 'access' }, this.ACCESS_TOKEN_SECRET, {
       expiresIn: this.ACCESS_TOKEN_EXPIRES_IN,
-    } as SignOptions);
+    });
   }
 
   static generateRefreshToken(payload: Omit<JwtPayload, 'type'>): string {
     return jwt.sign(
       { ...payload, type: 'refresh' },
       this.REFRESH_TOKEN_SECRET,
-      { expiresIn: this.REFRESH_TOKEN_EXPIRES_IN } as SignOptions
+      { expiresIn: this.REFRESH_TOKEN_EXPIRES_IN }
     );
   }
 

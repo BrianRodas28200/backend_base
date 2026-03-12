@@ -57,7 +57,12 @@ src/
 
 ## 🛠️ Installation
 
-1. Clone the repository
+1. Clone the repository:
+```bash
+git clone https://github.com/BrianRodas28200/backend_base.git
+cd backend_base
+```
+
 2. Install dependencies:
 ```bash
 npm install
@@ -71,7 +76,11 @@ cp .env.example .env
 
 4. Set up the database:
 ```bash
-mysql -u root -p < database-setup.sql
+# Option 1: Using Docker (recommended)
+docker-compose up -d mysql
+
+# Option 2: Manual MySQL setup
+mysql -u root -p < database-init/init.sql
 ```
 
 5. Build the project:
@@ -79,7 +88,49 @@ mysql -u root -p < database-setup.sql
 npm run build
 ```
 
-## 🔧 Environment Variables
+## � Running the Application
+
+### Development Mode
+```bash
+npm run dev
+```
+
+### Production Mode
+```bash
+npm run build
+npm start
+```
+
+### Docker Mode
+```bash
+# Full stack (API + MySQL + PhpMyAdmin)
+npm run docker:dev
+
+# API only
+npm run docker:build
+npm run docker:run
+
+# View logs
+npm run docker:logs
+
+# Stop services
+npm run docker:down
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+## �🔧 Environment Variables
 
 Create a `.env` file in the root directory:
 
@@ -261,7 +312,7 @@ cp .env.example .env  # Edita con tus credenciales
 npm install
 ```
 
-## �🔮 Future Enhancements
+## �� Future Enhancements
 
 - Role-based access control (RBAC)
 - Rate limiting

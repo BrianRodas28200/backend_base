@@ -1,7 +1,7 @@
-import { DatabaseService } from '../utils/database';
+import { DatabaseService } from '../../utils/database';
 import { RowDataPacket } from 'mysql2';
-import { JwtService } from '../utils/jwt';
-import { SQLiteService } from '../utils/sqlite';
+import { JwtService } from '../../utils/jwt';
+import { SQLiteService } from '../../utils/sqlite';
 
 export interface LoginResult extends RowDataPacket {
   pk_user: number;

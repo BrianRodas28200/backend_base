@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
 import { BaseController } from '../../controllers/BaseController';
-import { AuthService } from '../../services/authService';
+import { AuthService, AuthResponse } from './auth.service';
 import { validate } from '../../middleware/validation';
 
 // Validation schemas

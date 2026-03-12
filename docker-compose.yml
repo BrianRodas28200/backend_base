@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3100:3100"
+    environment:
+      - NODE_ENV=production
+      - PORT=3100
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=gestionpro
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - JWT_ACCESS_SECRET=your-super-secret-access-key-change-this
+      - JWT_REFRESH_SECRET=your-super-secret-refresh-key-change-this
+      - JWT_ACCESS_EXPIRES_IN=15m
+      - JWT_REFRESH_EXPIRES_IN=7d
+      - CORS_ORIGIN=http://localhost:3000
+      - LOG_LEVEL=info
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - sqlite_data:/app/data
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=gestionpro
+      - MYSQL_USER=app_user
+      - MYSQL_PASSWORD=app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database-init:/docker-entrypoint-initdb.d
+    networks:
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # PhpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=rootpassword
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - backend-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  sqlite_data:
+    driver: local
+
+networks:
+  backend-network:
+    driver: bridge
