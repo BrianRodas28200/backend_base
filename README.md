@@ -236,14 +236,6 @@ npm install --save-dev jest @types/jest ts-jest supertest @types/supertest
 - `npm start` - Start production server
 - `npm test` - Run tests (when configured)
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
 ## 📄 License
 
 This project is licensed under the ISC License.
@@ -269,19 +261,10 @@ cp .env.example .env  # Edita con tus credenciales
 npm install
 ```
 
-2. **Crear tu primer módulo**:
-```bash
-# Sigue los ejemplos en DEVELOPER_GUIDE.md para agregar un nuevo módulo
-```
-
 ## �🔮 Future Enhancements
 
 - Role-based access control (RBAC)
 - Rate limiting
-- API documentation (Swagger/OpenAPI)
+- API documentation
 - Unit and integration tests
 - Docker containerization
-- CI/CD pipeline
-- Email verification
-- Password reset functionality
-- Social login integration
