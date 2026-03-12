@@ -201,3 +201,4 @@ test-results/
 
 # DynamoDB Local files
 .dynamodb/
+.env
