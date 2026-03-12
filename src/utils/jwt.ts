@@ -14,12 +14,14 @@ export class JwtService {
   static REFRESH_TOKEN_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d';
 
   static generateAccessToken(payload: Omit<JwtPayload, 'type'>): string {
+    // @ts-ignore - TypeScript issue with jsonwebtoken types
     return jwt.sign({ ...payload, type: 'access' }, this.ACCESS_TOKEN_SECRET, {
       expiresIn: this.ACCESS_TOKEN_EXPIRES_IN,
     });
   }
 
   static generateRefreshToken(payload: Omit<JwtPayload, 'type'>): string {
+    // @ts-ignore - TypeScript issue with jsonwebtoken types
     return jwt.sign(
       { ...payload, type: 'refresh' },
       this.REFRESH_TOKEN_SECRET,
