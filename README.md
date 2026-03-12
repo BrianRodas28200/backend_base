@@ -248,7 +248,33 @@ npm install --save-dev jest @types/jest ts-jest supertest @types/supertest
 
 This project is licensed under the ISC License.
 
-## 🔮 Future Enhancements
+## � Guía para Desarrolladores
+
+¿Eres nuevo en el proyecto? 🎉 Revisa **[DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)** para una guía completa sobre:
+
+- 🏗️ **Estructura del proyecto** y dónde agregar tu código
+- 🔧 **Convenciones** de nomenclatura y estilos
+- 📝 **Ejemplos completos** para nuevos módulos
+- 🔐 **Procedimientos almacenados** - cómo integrarlos
+- 🎯 **Buenas prácticas** y patrones de arquitectura
+- 🚀 **Comandos útiles** para desarrollo y testing
+
+### 🚀 **Inicio Rápido**:
+
+1. **Clonar y configurar**:
+```bash
+git clone https://github.com/BrianRodas28200/backend_base.git
+cd backend_base
+cp .env.example .env  # Edita con tus credenciales
+npm install
+```
+
+2. **Crear tu primer módulo**:
+```bash
+# Sigue los ejemplos en DEVELOPER_GUIDE.md para agregar un nuevo módulo
+```
+
+## �🔮 Future Enhancements
 
 - Role-based access control (RBAC)
 - Rate limiting
